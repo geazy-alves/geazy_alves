@@ -11,7 +11,7 @@ Aula de ENGENHARIA DE SOFTWARE
 
 colocar o diagrama de do banco
 
-![teste]{https://github.com/geazy-alves/geazy_alves/blob/main/imagens/teste%20.png}
+![teste]{https://github.com/geazy-alves/geazy_alves/blob/main/imagens/teste%20.png?raw=true}
 
  # 3. diagrama de casos de uso
  colocar o diagrama de casos de uso
