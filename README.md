@@ -1,25 +1,29 @@
 # geazy_alves
 Aula de ENGENHARIA DE SOFTWARE
-  
+sistema para clinica veterinaria..
+ Autor: Geazy Alves Lacerda  
 
-# 1. descrição de sistema
- sistema para clinica veterinaria..
- autor: geazy
- Nome da clinica:
+# 1. Descrição de sistema
+ Sistema para clinica veterinaria..
+ 
+ Nome da clinica: Veterinaria São Paulo
 
  # 2. Diagrama do banco do dados
 
 colocar o diagrama de do banco
 
-![teste]{https://github.com/geazy-alves/geazy_alves/blob/main/imagens/teste%20.png?raw=true}
+![teste] (https://github.com/geazy-alves/geazy_alves/blob/main/imagens/teste%20.png?raw=true)
 
- # 3. diagrama de casos de uso
+ # 3. Diagrama de casos de uso
  colocar o diagrama de casos de uso
-![]{}
+
+![]()
+
+ # 4. Principais telas do sistema 
+![]()
+
  
- # 4. principais telas do sistema 
-![]{}
- 
- # 5. arquitetura do sistema 
-![]{}
+ # 5. Arquitetura do sistema 
+![]()
+
 ...
