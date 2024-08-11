@@ -10,7 +10,7 @@ sistema para clinica veterinaria..
 
  # 2. Diagrama do banco do dados
 
-![Diagrama do banco do dados]()
+![Diagrama do banco do dados](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Diagrama%20do%20banco%20do%20dados.png?raw=true)
 
  # 3. Diagrama de casos de uso
  colocar o diagrama de casos de uso
