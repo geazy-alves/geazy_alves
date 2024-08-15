@@ -15,106 +15,144 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Copiando estrutura do banco de dados para veterinaria_sao_paulo
-CREATE DATABASE IF NOT EXISTS `veterinaria_sao_paulo` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `veterinaria_sao_paulo`;
+-- Copiando estrutura do banco de dados para marcelandia
+CREATE DATABASE IF NOT EXISTS `marcelandia` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `marcelandia`;
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.agenda
+-- Copiando estrutura para tabela marcelandia.agenda
 CREATE TABLE IF NOT EXISTS `agenda` (
-  `IdAgenda` int NOT NULL AUTO_INCREMENT,
-  `Data` date NOT NULL,
-  `Horario` time NOT NULL,
-  `Status` enum('Agendado','Atendido','Cancelado') NOT NULL,
-  `IdVeterinarios` int DEFAULT NULL,
-  `IdCliente` int DEFAULT NULL,
-  `IdAnimal` int DEFAULT NULL,
-  PRIMARY KEY (`IdAgenda`),
-  KEY `IdVeterinarios` (`IdVeterinarios`),
-  KEY `IdCliente` (`IdCliente`),
-  KEY `IdAnimal` (`IdAnimal`),
-  CONSTRAINT `agenda_ibfk_1` FOREIGN KEY (`IdVeterinarios`) REFERENCES `veterinarios` (`IdVeterinarios`),
-  CONSTRAINT `agenda_ibfk_2` FOREIGN KEY (`IdCliente`) REFERENCES `clientes` (`IdCliente`),
-  CONSTRAINT `agenda_ibfk_3` FOREIGN KEY (`IdAnimal`) REFERENCES `animais` (`IdAnimal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+  `id_agenda` int NOT NULL AUTO_INCREMENT,
+  `data_hora` datetime DEFAULT NULL,
+  `id_veterinario` int DEFAULT NULL,
+  `id_animal` int DEFAULT NULL,
+  `atendido` tinyint(1) DEFAULT NULL,
+  `prioridade` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_agenda`),
+  KEY `id_veterinario` (`id_veterinario`),
+  KEY `id_animal` (`id_animal`),
+  CONSTRAINT `agenda_ibfk_1` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinario` (`id_veterinario`),
+  CONSTRAINT `agenda_ibfk_2` FOREIGN KEY (`id_animal`) REFERENCES `animal` (`id_animal`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.agenda: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela marcelandia.agenda: ~5 rows (aproximadamente)
+INSERT INTO `agenda` (`id_agenda`, `data_hora`, `id_veterinario`, `id_animal`, `atendido`, `prioridade`) VALUES
+	(1, '2024-08-13 08:00:00', 1, 1, 0, 'Normal'),
+	(2, '2024-08-13 09:00:00', 2, 2, 1, 'Alta'),
+	(3, '2024-08-13 10:00:00', 3, 3, 0, 'Normal'),
+	(4, '2024-08-13 11:00:00', 4, 4, 1, 'Baixa'),
+	(5, '2024-08-13 12:00:00', 5, 5, 0, 'Normal');
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.animais
-CREATE TABLE IF NOT EXISTS `animais` (
-  `IdAnimal` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(50) DEFAULT NULL,
-  `IdCliente` int DEFAULT NULL,
-  `Tipo` enum('Gato','Cachorro') NOT NULL,
-  `Raca` varchar(30) DEFAULT NULL,
-  `Sexo` enum('M','F') DEFAULT NULL,
-  `Peso` int DEFAULT NULL,
-  `CondicoesChegada` text,
-  `TipoRacao` varchar(100) DEFAULT NULL,
-  `Habitos` text,
-  `Foto` longblob,
-  PRIMARY KEY (`IdAnimal`),
-  KEY `idx_Animais` (`IdCliente`),
-  CONSTRAINT `idx_Animais` FOREIGN KEY (`IdCliente`) REFERENCES `clientes` (`IdCliente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf16le;
+-- Copiando estrutura para tabela marcelandia.animal
+CREATE TABLE IF NOT EXISTS `animal` (
+  `id_animal` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tipo` enum('Cachorro','Gato') COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `condicao` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `racao` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `habitos` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `id_cliente` int DEFAULT NULL,
+  PRIMARY KEY (`id_animal`),
+  KEY `id_cliente` (`id_cliente`),
+  CONSTRAINT `animal_ibfk_1` FOREIGN KEY (`id_cliente`) REFERENCES `cliente` (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.animais: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela marcelandia.animal: ~5 rows (aproximadamente)
+INSERT INTO `animal` (`id_animal`, `nome`, `tipo`, `condicao`, `racao`, `habitos`, `id_cliente`) VALUES
+	(1, 'Rex', 'Cachorro', 'Saudável', 'Ração Premium', 'Corre no parque', 1),
+	(2, 'Miau', 'Gato', 'Leve resfriado', 'Ração de Peixe', 'Dormir o dia todo', 2),
+	(3, 'Bolt', 'Cachorro', 'Problema na pata', 'Ração para cães idosos', 'Brinca com bola', 3),
+	(4, 'Luna', 'Gato', 'Vacinação atrasada', 'Ração para filhotes', 'Explora a casa', 4),
+	(5, 'Max', 'Cachorro', 'Alergia alimentar', 'Ração hipoalergênica', 'Gosta de nadar', 5);
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.atendente
+-- Copiando estrutura para tabela marcelandia.atendente
 CREATE TABLE IF NOT EXISTS `atendente` (
-  `IdAtendente` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `Identificacao` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`IdAtendente`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id_atendente` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_atendente`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.atendente: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela marcelandia.atendente: ~5 rows (aproximadamente)
+INSERT INTO `atendente` (`id_atendente`, `nome`) VALUES
+	(1, 'Paulo Santos'),
+	(2, 'Carla Mendes'),
+	(3, 'Ricardo Alves'),
+	(4, 'Sofia Gomes'),
+	(5, 'Lucas Lima');
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.clientes
-CREATE TABLE IF NOT EXISTS `clientes` (
-  `IdCliente` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(50) DEFAULT NULL,
-  `Telefone` varchar(50) DEFAULT NULL,
-  `Endereco` varchar(50) DEFAULT NULL,
-  `Email` varchar(255) DEFAULT NULL,
-  `Observacao` varchar(255) DEFAULT NULL,
-  `Foto` longblob,
-  PRIMARY KEY (`IdCliente`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf16le COMMENT='tabela de clientes';
+-- Copiando estrutura para tabela marcelandia.cliente
+CREATE TABLE IF NOT EXISTS `cliente` (
+  `id_cliente` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `telefone` varchar(20) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `endereco` varchar(150) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_cliente`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.clientes: ~4 rows (aproximadamente)
-INSERT INTO `clientes` (`IdCliente`, `Nome`, `Telefone`, `Endereco`, `Email`, `Observacao`, `Foto`) VALUES
-	(1, 'Geazy', '91234-9876', 'Rua das Flores, 123', NULL, NULL, NULL),
-	(2, 'teste', '5555', NULL, NULL, NULL, NULL),
-	(3, 'João Silva', '91234-5678', 'Rua das Flores, 123', 'joao@email.com', NULL, NULL),
-	(4, 'Maria Oliveira', '91234-9876', 'Avenida Central, 456', 'maria@email.com', NULL, NULL);
+-- Copiando dados para a tabela marcelandia.cliente: ~5 rows (aproximadamente)
+INSERT INTO `cliente` (`id_cliente`, `nome`, `telefone`, `endereco`) VALUES
+	(1, 'Carlos Silva', '123456789', 'Rua A, 123'),
+	(2, 'Ana Souza', '987654321', 'Rua B, 456'),
+	(3, 'João Pereira', '456123789', 'Rua C, 789'),
+	(4, 'Mariana Lima', '789456123', 'Rua D, 101'),
+	(5, 'Fernando Alves', '321654987', 'Rua E, 202');
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.prontuario
-CREATE TABLE IF NOT EXISTS `prontuario` (
-  `IdProntuario` int NOT NULL AUTO_INCREMENT,
-  `DataAtendimento` date NOT NULL,
-  `Observacoes` text COLLATE utf8mb4_general_ci,
-  `IdVeterinarios` int DEFAULT NULL,
-  `IdAnimal` int DEFAULT NULL,
-  PRIMARY KEY (`IdProntuario`),
-  KEY `IdAnimal` (`IdAnimal`),
-  KEY `IdVeterinarios` (`IdVeterinarios`),
-  CONSTRAINT `prontuario_ibfk_1` FOREIGN KEY (`IdAnimal`) REFERENCES `animais` (`IdAnimal`),
-  CONSTRAINT `prontuario_ibfk_2` FOREIGN KEY (`IdVeterinarios`) REFERENCES `veterinarios` (`IdVeterinarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Copiando estrutura para tabela marcelandia.ficha
+CREATE TABLE IF NOT EXISTS `ficha` (
+  `id_ficha` int NOT NULL AUTO_INCREMENT,
+  `id_animal` int DEFAULT NULL,
+  `data_abertura` datetime DEFAULT NULL,
+  `observacoes` text COLLATE utf8mb4_general_ci,
+  `receita` text COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`id_ficha`),
+  KEY `id_animal` (`id_animal`),
+  CONSTRAINT `ficha_ibfk_1` FOREIGN KEY (`id_animal`) REFERENCES `animal` (`id_animal`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.prontuario: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela marcelandia.ficha: ~5 rows (aproximadamente)
+INSERT INTO `ficha` (`id_ficha`, `id_animal`, `data_abertura`, `observacoes`, `receita`) VALUES
+	(1, 1, '2024-08-13 08:30:00', 'Animal saudável, recomenda-se check-up anual.', 'Suplemento vitamínico A'),
+	(2, 2, '2024-08-13 09:30:00', 'Gato com resfriado leve. Receitar antibiótico.', 'Amoxicilina 5ml'),
+	(3, 3, '2024-08-13 10:30:00', 'Problema na pata, precisa de exame de raio-x.', 'Anti-inflamatório por 5 dias'),
+	(4, 4, '2024-08-13 11:30:00', 'Vacinas atrasadas, aplicar as vacinas.', 'Vacina antirrábica e polivalente'),
+	(5, 5, '2024-08-13 12:30:00', 'Alergia alimentar identificada. Trocar ração.', 'Ração hipoalergênica marca X');
 
--- Copiando estrutura para tabela veterinaria_sao_paulo.veterinarios
-CREATE TABLE IF NOT EXISTS `veterinarios` (
-  `IdVeterinarios` int NOT NULL AUTO_INCREMENT,
-  `Nome` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `Especialidades` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Telefone` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Endereco` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  PRIMARY KEY (`IdVeterinarios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Copiando estrutura para tabela marcelandia.formulario
+CREATE TABLE IF NOT EXISTS `formulario` (
+  `id_formulario` int NOT NULL AUTO_INCREMENT,
+  `id_animal` int DEFAULT NULL,
+  `id_veterinario` int DEFAULT NULL,
+  `data` datetime DEFAULT NULL,
+  `detalhes_entrevista` text COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`id_formulario`),
+  KEY `id_animal` (`id_animal`),
+  KEY `id_veterinario` (`id_veterinario`),
+  CONSTRAINT `formulario_ibfk_1` FOREIGN KEY (`id_animal`) REFERENCES `animal` (`id_animal`),
+  CONSTRAINT `formulario_ibfk_2` FOREIGN KEY (`id_veterinario`) REFERENCES `veterinario` (`id_veterinario`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- Copiando dados para a tabela veterinaria_sao_paulo.veterinarios: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela marcelandia.formulario: ~5 rows (aproximadamente)
+INSERT INTO `formulario` (`id_formulario`, `id_animal`, `id_veterinario`, `data`, `detalhes_entrevista`) VALUES
+	(1, 1, 1, '2024-08-13 08:15:00', 'O dono relatou que o animal está em boas condições, sem problemas recentes.'),
+	(2, 2, 2, '2024-08-13 09:15:00', 'O gato está com sintomas leves de resfriado. Está comendo normalmente.'),
+	(3, 3, 3, '2024-08-13 10:15:00', 'O cão tem mancado levemente, sem histórico de lesões anteriores.'),
+	(4, 4, 4, '2024-08-13 11:15:00', 'O gato não tem histórico de vacinas recentes, recomenda-se atualização.'),
+	(5, 5, 5, '2024-08-13 12:15:00', 'O cão tem mostrado sinais de alergia após alimentação.');
+
+-- Copiando estrutura para tabela marcelandia.veterinario
+CREATE TABLE IF NOT EXISTS `veterinario` (
+  `id_veterinario` int NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `especialidade` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id_veterinario`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Copiando dados para a tabela marcelandia.veterinario: ~5 rows (aproximadamente)
+INSERT INTO `veterinario` (`id_veterinario`, `nome`, `especialidade`) VALUES
+	(1, 'Dr. Marcos', 'Ortopedia'),
+	(2, 'Dra. Ana', 'Dermatologia'),
+	(3, 'Dr. Pedro', 'Cardiologia'),
+	(4, 'Dra. Clara', 'Nutrição'),
+	(5, 'Dr. João', 'Vacinação');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
