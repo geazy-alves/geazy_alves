@@ -118,6 +118,6 @@ Sistema para clinica veterinaria..
 
  ---
  # 5. Arquitetura do sistema 
-![]()
+![](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Arquitetura%20do%20sistema.png?raw=true)
 
 ...
