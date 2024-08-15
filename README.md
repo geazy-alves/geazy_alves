@@ -110,7 +110,7 @@ Sistema para clinica veterinaria..
  # 3. Diagrama de casos de uso
 
 
-![](https://raw.githubusercontent.com/geazy-alves/geazy_alves/eb3d35062fb3a434f23ef299aefc34607efa41a0/imagens/Diagrama%20sem%20nome.drawio.png)
+![](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Diagrama%20sem%20nome.drawio.png?raw=true)
 
 ---
  # 4. Principais telas do sistema 
