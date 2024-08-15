@@ -105,12 +105,12 @@ Sistema para clinica veterinaria..
     VETERINARIO ||--o{ FORMULARIO: "preenche"
 
  ```
-![Diagrama do banco do dados](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Diagrama%20do%20banco%20do%20dados.png?raw=true)
+![Diagrama do banco do dados](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Diagrama%20do%20banco%20do%20dados.png)
 ---
  # 3. Diagrama de casos de uso
 
 
-![](https://raw.githubusercontent.com/geazy-alves/geazy_alves/eb3d35062fb3a434f23ef299aefc34607efa41a0/imagens/Diagrama%20sem%20nome.drawio.png?token=BKNG4DR4MFKI3YACMQS32BDGXVRG4)
+![](https://raw.githubusercontent.com/geazy-alves/geazy_alves/eb3d35062fb3a434f23ef299aefc34607efa41a0/imagens/Diagrama%20sem%20nome.drawio.png)
 
 ---
  # 4. Principais telas do sistema 
