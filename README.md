@@ -121,6 +121,18 @@ Sistema para clinica veterinaria..
 ![](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Captura%20de%20tela%202024-08-14%20232154.png?raw=true)
  ---
  # 5. Arquitetura do sistema 
+```mermaid
+%%{init: {"theme": "default"}}%%
+graph TD
+    ClienteWeb[Cliente Web] -->|Faz Requisição| ServidorWeb[Servidor Web]
+    ServidorWeb -->|Executa| AplicacaoPHP[Aplicação PHP]
+    AplicacaoPHP -->|Acessa Dados| ServidorBD[(Servidor de Banco de Dados)]
+
+```
+
+
+   
+
 ![](https://github.com/geazy-alves/geazy_alves/blob/main/imagens/Arquitetura%20do%20sistema.png?raw=true)
 
 ...
